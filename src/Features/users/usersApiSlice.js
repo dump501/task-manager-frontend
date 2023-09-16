@@ -8,8 +8,38 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     }),
     profile: builder.query({
       query: () => `/api/v1/user/profile`,
+      providesTags: ["UserProfile"],
+    }),
+    deleteUser: builder.mutation({
+      query: (id) => ({
+        url: `/api/v1/admin/user/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["User"],
+    }),
+    adminUpdateUser: builder.mutation({
+      query: ({ id, form }) => ({
+        url: `/api/v1/admin/user/${id}`,
+        method: "PATCH",
+        body: form,
+      }),
+      invalidatesTags: ["User"],
+    }),
+    updateUser: builder.mutation({
+      query: (form) => ({
+        url: `/api/v1/user`,
+        method: "PATCH",
+        body: form,
+      }),
+      invalidatesTags: ["UserProfile"],
     }),
   }),
 });
 
-export const { useGetUsersQuery, useProfileQuery } = usersApiSlice;
+export const {
+  useGetUsersQuery,
+  useProfileQuery,
+  useDeleteUserMutation,
+  useAdminUpdateUserMutation,
+  useUpdateUserMutation,
+} = usersApiSlice;

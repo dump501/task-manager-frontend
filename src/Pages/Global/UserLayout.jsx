@@ -4,26 +4,37 @@ import Sidebar from "./Sidebar";
 import { drawerWidth } from "../../helpers/uiHelpers";
 import { useSelector } from "react-redux";
 import Topbar from "./Topbar";
-import { Mail } from "@mui/icons-material";
+import {
+  DashboardOutlined,
+  LogoutOutlined,
+  Mail,
+  PersonOutline,
+  TaskOutlined,
+} from "@mui/icons-material";
 const items = [
   {
     title: "Dashboard",
-    icon: <Mail />,
+    icon: <DashboardOutlined />,
     to: "/user/dashboard",
   },
   {
     title: "Tasks",
-    icon: <Mail />,
+    icon: <TaskOutlined />,
     to: "/user/tasks",
   },
   {
     title: "Profile",
-    icon: <Mail />,
+    icon: <PersonOutline />,
     to: "/user/profile",
+  },
+  {
+    title: "Logout",
+    icon: <LogoutOutlined />,
+    to: "/logout",
   },
 ];
 
-const UserLayout = () => {
+const UserLayout = ({ children }) => {
   const { isDrawerOpen } = useSelector((state) => state.ui);
   return (
     <Box display="flex">

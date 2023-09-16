@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { setCredentials } from "../Features/auth/authSlice";
 import HttpStatus from "../helpers/HttpStatus.json";
 import { readCookie, saveToCookie } from "../helpers/uiHelpers";
+import { setAlertData, setAlertOpen } from "../Features/uiSlice";
 
 const Home = () => {
   const [login, { isLoading }] = useLoginMutation();
@@ -45,12 +46,30 @@ const Home = () => {
         })
       );
       saveToCookie("jwt", response.data.refreshToken);
-      navigate("/admin/dashboard");
+      if (parseInt(response.data.user.role_id) === 1) {
+        navigate("/admin/dashboard");
+      } else {
+        navigate("/user/dashboard");
+      }
     } catch (error) {
       console.log(error);
       if (error?.status === HttpStatus.badRequest) {
+        dispatch(
+          setAlertData({
+            type: "error",
+            data: "Email and password are required",
+          })
+        );
+        dispatch(setAlertOpen(true));
         console.log("Email or password required");
       } else {
+        dispatch(
+          setAlertData({
+            type: "error",
+            data: "Incorrect mail and / or password",
+          })
+        );
+        dispatch(setAlertOpen(true));
         console.log("Incorrect Email or password");
       }
     }
@@ -86,6 +105,7 @@ const Home = () => {
             <TextField
               fullWidth
               name="email"
+              type="email"
               placeholder="Enter your email"
               onChange={handleChange}
               InputProps={{

@@ -33,3 +33,9 @@ export function formatDateForInput(dateTime) {
   let date = new Date(dateTime);
   return date.toISOString().substring(0, 19);
 }
+
+export function deleteCookies() {
+  document.cookie.split("; ").forEach(function (c) {
+    document.cookie = c.replace("/^ +/", "");
+  });
+}

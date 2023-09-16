@@ -4,28 +4,41 @@ import Sidebar from "./Sidebar";
 import { drawerWidth } from "../../helpers/uiHelpers";
 import { useSelector } from "react-redux";
 import Topbar from "./Topbar";
-import { Mail } from "@mui/icons-material";
+import {
+  Dashboard,
+  LogoutOutlined,
+  Mail,
+  Person3Outlined,
+  PersonOutline,
+  Task,
+  TaskOutlined,
+} from "@mui/icons-material";
 
 const items = [
   {
     title: "Dashboard",
-    icon: <Mail />,
+    icon: <Dashboard />,
     to: "/admin/dashboard",
   },
   {
     title: "Tasks",
-    icon: <Mail />,
+    icon: <TaskOutlined />,
     to: "/admin/tasks",
   },
   {
     title: "Manage users",
-    icon: <Mail />,
+    icon: <Person3Outlined />,
     to: "/admin/users",
   },
   {
     title: "Profile",
-    icon: <Mail />,
+    icon: <PersonOutline />,
     to: "/admin/profile",
+  },
+  {
+    title: "Logout",
+    icon: <LogoutOutlined />,
+    to: "/logout",
   },
 ];
 

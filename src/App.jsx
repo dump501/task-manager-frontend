@@ -14,6 +14,9 @@ import AdminTasks from "./Pages/Admin/AdminTasks";
 import Profile from "./Pages/Profile";
 import AdminTaskCreate from "./Pages/Admin/AdminTaskCreate";
 import DisplayAlert from "./Components/DisplayAlert";
+import Logout from "./Pages/Logout";
+import NotFound from "./Pages/NotFound";
+import UserDashboard from "./Pages/User/UserDashboard";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -33,6 +36,12 @@ function App() {
               <Route path="users" element={<AdminUsers />} />
               <Route path="profile" element={<Profile />} />
             </Route>
+            <Route path="/user" element={<AuthGuard />}>
+              <Route path="dashboard" element={<UserDashboard />} />
+              <Route path="profile" element={<Profile />} />
+            </Route>
+            <Route path="/logout" element={<Logout />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </ThemeProvider>
       </colorModeContext.Provider>

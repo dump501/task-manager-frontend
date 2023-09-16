@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { readCookie, saveToCookie } from "../../helpers/uiHelpers";
+import {
+  deleteCookies,
+  readCookie,
+  saveToCookie,
+} from "../../helpers/uiHelpers";
 
 export const authSlice = createSlice({
   name: "auth",
@@ -17,9 +21,11 @@ export const authSlice = createSlice({
       saveToCookie("at", accessToken);
       saveToCookie("user", JSON.stringify(user));
     },
-    logout: (state, action) => {
+    logout: (state) => {
       state.user = null;
       state.token = null;
+      // delete cookies
+      deleteCookies();
     },
   },
 });
