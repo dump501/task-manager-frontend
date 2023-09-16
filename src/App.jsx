@@ -1,5 +1,3 @@
-
-import CustomRoutes from './Components/CustomRoutes'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import Home from './Pages/Home'
 import AdminDashboard from './Pages/Admin/AdminDashboard'
@@ -8,32 +6,21 @@ import { Box, CssBaseline, ThemeProvider } from '@mui/material'
 import Topbar from './Pages/Global/Topbar'
 import Sidebar from './Pages/Global/Sidebar'
 import Dashboard from './Pages/Dashboard'
-import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { drawerWidth } from './helpers/uiHelpers'
+import Tasks from './Pages/Tasks'
 
 function App() {
   const [theme, colorMode] = useMode()
-  const {isDrawerOpen} = useSelector((state) => state.ui)
 
   return (
     <>
       <colorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Box display="flex">
-            <Sidebar />
-            <Box
-              sx={{
-                ml: isDrawerOpen ? "0" : `-${drawerWidth}px`
-              }}
-            >
-              <Topbar />
-              <Routes>
-                <Route path='/' element={<Dashboard />} />
+          <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/dashboard' element = {<Dashboard />} />
+                <Route path='/tasks' element = {<Tasks />} />
               </Routes>
-            </Box>
-          </Box>
         </ThemeProvider>
       </colorModeContext.Provider>
     </>

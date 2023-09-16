@@ -1,20 +1,24 @@
 import { ChevronLeft, Mail } from '@mui/icons-material'
-import { Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, styled } from '@mui/material'
-import React, { useState } from 'react'
+import {
+  Avatar, Box, Drawer,
+  IconButton, List, ListItem, ListItemButton,
+  ListItemIcon, ListItemText, Typography, styled
+} from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { closeDrawer } from '../../Redux/ui'
 import { drawerWidth } from '../../helpers/uiHelpers'
+import { Link } from 'react-router-dom';
 
-const DrawerHeader = styled('div')(() =>({
+const DrawerHeader = styled('div')(() => ({
   display: 'flex',
   alignItems: "center",
-  justifyContent: "flex-end"
+  justifyContent: "space-between"
 }))
 
-const Sidebar = () => {
+const Sidebar = ({ items }) => {
   const dispatch = useDispatch()
-  const {isDrawerOpen} = useSelector((state) => state.ui)
-  
+  const { isDrawerOpen } = useSelector((state) => state.ui)
+
   return (
     <Drawer
       sx={{
@@ -31,17 +35,30 @@ const Sidebar = () => {
       open={isDrawerOpen}
     >
       <DrawerHeader>
-        <IconButton onClick={()=> dispatch(closeDrawer())}>
+        <h2>Task manager</h2>
+        <IconButton onClick={() => dispatch(closeDrawer())}>
           <ChevronLeft />
         </IconButton>
       </DrawerHeader>
-      <Divider />
+      <Box display="flex" flexDirection="column" alignItems="center" py={1}>
+        <Avatar sx={{ width: 100, height: 100 }} />
+        <h2>Tsafack Fritz</h2>
+        <Typography>Admin</Typography>
+      </Box>
       <List>
-        {["Inbox", "Starred", "Send email", "Draft"].map((text) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon> <Mail /> </ListItemIcon>
-              <ListItemText primary={text} />
+        {items.map((item) => (
+          <ListItem key={item.title} disablePadding>
+            <ListItemButton to={item.to} component={Link}
+              sx={{
+                minHeight: 48,
+              }}>
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  justifyContent: 'center',
+                  px: 2.5,
+                }}> {item.icon} </ListItemIcon>
+              <ListItemText primary={item.title} />
             </ListItemButton>
           </ListItem>
         ))}
