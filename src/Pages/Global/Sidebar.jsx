@@ -1,37 +1,50 @@
-import { ChevronLeft, Mail } from '@mui/icons-material'
+import { ChevronLeft, Mail } from "@mui/icons-material";
 import {
-  Avatar, Box, Drawer,
-  IconButton, List, ListItem, ListItemButton,
-  ListItemIcon, ListItemText, Typography, styled
-} from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
-import { closeDrawer } from '../../Redux/ui'
-import { drawerWidth } from '../../helpers/uiHelpers'
-import { Link } from 'react-router-dom';
+  Avatar,
+  Box,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+  styled,
+  useTheme,
+} from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { drawerWidth } from "../../helpers/uiHelpers";
+import { Link } from "react-router-dom";
+import { closeDrawer } from "../../Features/uiSlice";
+import { selectCurrentUser } from "../../Features/auth/authSlice";
+import { tokens } from "../../theme";
 
-const DrawerHeader = styled('div')(() => ({
-  display: 'flex',
+const DrawerHeader = styled("div")(() => ({
+  display: "flex",
   alignItems: "center",
-  justifyContent: "space-between"
-}))
+  justifyContent: "space-between",
+}));
 
 const Sidebar = ({ items }) => {
-  const dispatch = useDispatch()
-  const { isDrawerOpen } = useSelector((state) => state.ui)
+  const user = useSelector(selectCurrentUser);
+  const dispatch = useDispatch();
+  const { isDrawerOpen } = useSelector((state) => state.ui);
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
   return (
     <Drawer
       sx={{
         width: drawerWidth,
         flexShrink: 0,
-        '& .MuiDrawer-paper': {
+        "& .MuiDrawer-paper": {
           width: drawerWidth,
-          boxSizing: "border-box"
-        }
-
+          boxSizing: "border-box",
+        },
       }}
-      variant='persistent'
-      anchor='left'
+      variant="persistent"
+      anchor="left"
       open={isDrawerOpen}
     >
       <DrawerHeader>
@@ -42,29 +55,38 @@ const Sidebar = ({ items }) => {
       </DrawerHeader>
       <Box display="flex" flexDirection="column" alignItems="center" py={1}>
         <Avatar sx={{ width: 100, height: 100 }} />
-        <h2>Tsafack Fritz</h2>
-        <Typography>Admin</Typography>
+        <Typography sx={{ textAlign: "center", fontWeight: "bold" }}>
+          {user.name}
+        </Typography>
+        <Typography sx={{ color: colors.primary[400] }}>Admin</Typography>
       </Box>
       <List>
         {items.map((item) => (
           <ListItem key={item.title} disablePadding>
-            <ListItemButton to={item.to} component={Link}
+            <ListItemButton
+              to={item.to}
+              component={Link}
               sx={{
                 minHeight: 48,
-              }}>
+              }}
+            >
               <ListItemIcon
                 sx={{
                   minWidth: 0,
-                  justifyContent: 'center',
+                  justifyContent: "center",
                   px: 2.5,
-                }}> {item.icon} </ListItemIcon>
+                }}
+              >
+                {" "}
+                {item.icon}{" "}
+              </ListItemIcon>
               <ListItemText primary={item.title} />
             </ListItemButton>
           </ListItem>
         ))}
       </List>
     </Drawer>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;
