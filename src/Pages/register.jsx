@@ -10,20 +10,24 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useLoginMutation } from "../Features/auth/authApiSlice";
+import {
+  useLoginMutation,
+  useRegisterMutation,
+} from "../Features/auth/authApiSlice";
 import { useDispatch } from "react-redux";
 import { logout, setCredentials } from "../Features/auth/authSlice";
 import HttpStatus from "../helpers/HttpStatus.json";
 import { readCookie, saveToCookie } from "../helpers/uiHelpers";
 import { setAlertData, setAlertOpen } from "../Features/uiSlice";
 
-const Home = () => {
-  const [login, { isLoading }] = useLoginMutation();
+const Register = () => {
+  const [register, { isLoading }] = useRegisterMutation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [form, setform] = useState({
     email: null,
     password: null,
+    name: null,
   });
 
   const handleChange = (e) => {
@@ -37,27 +41,16 @@ const Home = () => {
     try {
       e.preventDefault();
       console.log(form);
-      const response = await login(form).unwrap();
+      const response = await register(form).unwrap();
       console.log(response);
-      dispatch(
-        setCredentials({
-          user: response.data.user,
-          accessToken: response.data.accessToken,
-        })
-      );
-      saveToCookie("jwt", response.data.refreshToken);
-      if (parseInt(response.data.user.role_id) === 1) {
-        navigate("/admin/dashboard");
-      } else {
-        navigate("/user/dashboard");
-      }
+      navigate("/");
     } catch (error) {
       console.log(error);
       if (error?.status === HttpStatus.badRequest) {
         dispatch(
           setAlertData({
             type: "error",
-            data: "Email and password are required",
+            data: "Email, Neme and password are required",
           })
         );
         dispatch(setAlertOpen(true));
@@ -103,9 +96,23 @@ const Home = () => {
               mb: 4,
             }}
           >
-            Login
+            Register
           </Typography>
           <Stack spacing={2}>
+            <TextField
+              fullWidth
+              name="name"
+              type="text"
+              placeholder="Enter your name"
+              onChange={handleChange}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Person />{" "}
+                  </InputAdornment>
+                ),
+              }}
+            />
             <TextField
               fullWidth
               name="email"
@@ -136,7 +143,7 @@ const Home = () => {
             />
             <Box display="flex" justifyContent="center">
               <Button size="lg" variant="contained" onClick={handleSubmit}>
-                Login
+                Register
               </Button>
             </Box>
             <Stack
@@ -144,9 +151,9 @@ const Home = () => {
               alignItems="center"
               justifyContent="flex-end"
             >
-              Not yet an account ?{" "}
-              <Button LinkComponent={Link} to="/register">
-                Register here
+              Already an account ?{" "}
+              <Button LinkComponent={Link} to="/">
+                Login here
               </Button>
             </Stack>
           </Stack>
@@ -156,4 +163,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Register;

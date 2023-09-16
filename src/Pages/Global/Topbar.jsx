@@ -34,7 +34,11 @@ const Topbar = () => {
         </IconButton>
         <Box
           display="flex"
-          backgroundColor={colors.primary[400]}
+          backgroundColor={
+            theme.palette.mode === "dark"
+              ? colors.primary[400]
+              : colors.primary[800]
+          }
           borderRadius="3px"
         >
           <InputBase sx={{ flex: 1 }} placeholder="Search" />
@@ -47,9 +51,9 @@ const Topbar = () => {
       <Box display="flex">
         <IconButton onClick={colorMode.toggleColorMode}>
           {theme.palette.mode === "dark" ? (
-            <DarkModeOutlined />
-          ) : (
             <LightModeOutlined />
+          ) : (
+            <DarkModeOutlined />
           )}
         </IconButton>
         <IconButton>

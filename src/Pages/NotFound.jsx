@@ -18,12 +18,16 @@ const NotFound = () => {
         404
       </Typography>
       <Typography fontSize={80}>Not found</Typography>
-      <Button
-        LinkComponent={Link}
-        to={user.role_id == 1 ? "/admin/dashboard" : "/user/dashboard"}
-      >
-        Go back to my dashboard
-      </Button>
+      {user && (
+        <Button
+          LinkComponent={Link}
+          to={user.role_id == 1 ? "/admin/dashboard" : "/user/dashboard"}
+        >
+          Go back to my dashboard
+        </Button>
+      )}
+      {!user && <Button LinkComponent={Link}>Create and account</Button>} or
+      <Button LinkComponent={Link}>Login to my account</Button>
     </Box>
   );
 };

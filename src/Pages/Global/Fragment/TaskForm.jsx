@@ -95,7 +95,7 @@ const TaskForm = ({
           value={form.deadline}
         />
       </Grid>
-      <Grid item sm={12}>
+      <Grid item sm={12} md={6}>
         <InputLabel
           sx={{
             mb: 1,
@@ -111,6 +111,26 @@ const TaskForm = ({
           onChange={handleChange}
           value={form.tag}
         />
+      </Grid>
+      <Grid item sm={12} md={6}>
+        <InputLabel
+          sx={{
+            mb: 1,
+            fontSize: 20,
+          }}
+        >
+          Assign to
+        </InputLabel>
+        <Select
+          name="current_status"
+          onChange={handleChange}
+          fullWidth
+          value={form.current_status}
+        >
+          <MenuItem value="Assigned">Assigned</MenuItem>
+          <MenuItem value="In Progress">In Progress</MenuItem>
+          <MenuItem value="Done">Done</MenuItem>
+        </Select>
       </Grid>
       <Grid item sm={12}>
         <Button size="lg" variant="contained" onClick={handleSubmit}>

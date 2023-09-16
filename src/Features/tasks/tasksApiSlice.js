@@ -29,6 +29,10 @@ export const tasksApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Task"],
     }),
+    getUserTasks: builder.query({
+      query: () => `/api/v1/user/task`,
+      providesTags: ["Task"],
+    }),
   }),
 });
 
@@ -37,4 +41,7 @@ export const {
   useStoreTaskMutation,
   useUpdateTaskMutation,
   useDeleteTaskMutation,
+  useGetUserTasksQuery,
+  useLazyGetTasksQuery,
+  useLazyGetUserTasksQuery,
 } = tasksApiSlice;

@@ -6,6 +6,8 @@ import {
   Button,
   ButtonGroup,
   Chip,
+  CircularProgress,
+  Divider,
   Modal,
   Paper,
   Stack,
@@ -34,6 +36,13 @@ import TaskForm from "../Global/Fragment/TaskForm";
 import { useGetUsersQuery } from "../../Features/users/usersApiSlice";
 import { useDispatch } from "react-redux";
 import { setAlertData, setAlertOpen } from "../../Features/uiSlice";
+import Detail from "../../Components/Detail";
+import {
+  useLazyGetTaskCommentsQuery,
+  useStoreTaskCommentMutation,
+} from "../../Features/comments/commentsApiSlice";
+import CommentForm from "../Global/Fragment/CommentForm";
+import CommentLine from "../../Components/CommentLine";
 
 const columns = [
   {
@@ -53,6 +62,18 @@ const columns = [
     field: "current_status",
     headerName: "Status",
     flex: 1,
+    renderCell: ({ row: { current_status } }) => {
+      switch (current_status) {
+        case "Done":
+          return <Chip label="Done" color="success" />;
+        case "Assigned":
+          return <Chip label="Assigned" color="error" />;
+        case "In Progress":
+          return <Chip label="In Progress" color="warning" />;
+        default:
+          break;
+      }
+    },
   },
   {
     field: "created_by",
@@ -70,7 +91,6 @@ const columns = [
 ];
 
 const AdminTasks = () => {
-  const theme = useTheme();
   const { data: tasks, isLoading } = useGetTasksQuery();
   const [open, setopen] = useState(false);
   const [editing, setediting] = useState(false);
@@ -80,6 +100,11 @@ const AdminTasks = () => {
   const { data: users } = useGetUsersQuery();
   const [updateTask, { isLoading: isSendingForm }] = useUpdateTaskMutation();
   const [deleteTask, { isLoading: isDeleting }] = useDeleteTaskMutation();
+  const [commenting, setcommenting] = useState(false);
+  const [currentComments, setcurrentComments] = useState(null);
+  const [getTaskComments] = useLazyGetTaskCommentsQuery();
+  const [storeTaskComment, { isLoading: isSendingComment }] =
+    useStoreTaskCommentMutation();
   const [form, setform] = useState({
     title: "",
     description: "",
@@ -88,7 +113,7 @@ const AdminTasks = () => {
     tag: "",
   });
 
-  const handleRowClick = (id) => {
+  const handleRowClick = async (id) => {
     console.log(id, tasks?.data);
     let selected = tasks?.data.filter((task) => task.id === id)[0];
     setcurrentTask(selected);
@@ -101,8 +126,11 @@ const AdminTasks = () => {
         ? formatDateForInput(selected?.deadline)
         : formatDateForInput(new Date().toString()),
       tag: selected?.tag,
+      current_status: selected.current_status,
     });
     setopen(true);
+    let response = await getTaskComments(selected.id);
+    setcurrentComments(response.data.data);
   };
 
   const handleChange = (e) => {
@@ -110,7 +138,6 @@ const AdminTasks = () => {
       ...prev,
       [e.target.name]: e.target.value,
     }));
-    console.log(form);
   };
 
   const handleClose = () => {
@@ -120,7 +147,6 @@ const AdminTasks = () => {
 
   const handleSubmit = async (e) => {
     try {
-      console.log(form);
       let response = await updateTask({ id: currentTask.id, form });
       if (response?.error?.data) {
         dispatch(setAlertData({ type: "error", data: response?.error?.data }));
@@ -150,6 +176,29 @@ const AdminTasks = () => {
       if (response?.data) {
         dispatch(
           setAlertData({ type: "success", data: "Task deleted successfully" })
+        );
+        dispatch(setAlertOpen(true));
+        setediting(false);
+        setopen(false);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleCommentSave = async (e) => {
+    try {
+      let response = await storeTaskComment({
+        task_id: currentTask?.id,
+        content: form.content,
+      });
+      if (response?.error?.data) {
+        dispatch(setAlertData({ type: "error", data: response?.error?.data }));
+        dispatch(setAlertOpen(true));
+      }
+      if (response?.data) {
+        dispatch(
+          setAlertData({ type: "success", data: "Comment Saved successfully" })
         );
         dispatch(setAlertOpen(true));
         setediting(false);
@@ -203,7 +252,7 @@ const AdminTasks = () => {
         <Paper
           sx={{
             position: "absolute",
-            overflowY: "scroll",
+            overflowY: "auto",
             top: "50%",
             left: "50%",
             width: { sm: "90%", md: "90%" },
@@ -222,53 +271,24 @@ const AdminTasks = () => {
           <Typography mb={2}>{currentTask?.description}</Typography>
 
           <Stack>
-            <Stack mb={2} direction="row" alignItems="center">
-              <Avatar
-                sx={{
-                  mr: 2,
-                }}
-              />
-              <Stack>
-                <Typography fontWeight="bold" mr={1}>
-                  Assigned to
-                </Typography>
-                <Typography>
-                  {currentTask?.assignedTo?.name} the{" "}
-                  {formatDateTime(currentTask?.assigned_date)}
-                </Typography>
-              </Stack>
-            </Stack>
-            <Stack mb={2} direction="row" alignItems="center">
-              <Avatar
-                sx={{
-                  mr: 2,
-                }}
-              />
-              <Stack>
-                <Typography fontWeight="bold" mr={1}>
-                  Assigned by
-                </Typography>
-                <Typography>{currentTask?.assignedBy?.name}</Typography>
-              </Stack>
-            </Stack>
-            <Stack mb={2} direction="row" alignItems="center">
-              <Avatar
-                sx={{
-                  mr: 2,
-                }}
-              />
-              <Stack>
-                <Typography fontWeight="bold" mr={1}>
-                  Created by
-                </Typography>
-                <Typography>
-                  {currentTask?.createdBy?.name} the{" "}
-                  {formatDateTime(currentTask?.created_at)}
-                </Typography>
-              </Stack>
-            </Stack>
+            <Detail
+              title="Assigned to"
+              subtitle={`${currentTask?.assignedTo?.name} the ${formatDateTime(
+                currentTask?.assigned_date
+              )}`}
+            />
+            <Detail
+              title="Assigned by"
+              subtitle={currentTask?.assignedBy?.name}
+            />
+            <Detail
+              title="Created by"
+              subtitle={`${currentTask?.createdBy?.name} the ${formatDateTime(
+                currentTask?.created_at
+              )}`}
+            />
           </Stack>
-          <Stack direction="row" justifyContent="flex-end" spacing={2}>
+          <Stack direction="row" justifyContent="flex-end" spacing={2} mb={2}>
             <Button
               startIcon={<EditOutlined />}
               variant="contained"
@@ -288,8 +308,13 @@ const AdminTasks = () => {
             </Button>
           </Stack>
 
+          <Divider />
+
           {editing && (
-            <Box>
+            <Box my={2}>
+              <Typography variant="h3" mb={2}>
+                Editing task
+              </Typography>
               <TaskForm
                 form={form}
                 isSendingForm={isSendingForm}
@@ -297,6 +322,37 @@ const AdminTasks = () => {
                 handleSubmit={handleSubmit}
                 users={users}
               />
+            </Box>
+          )}
+          <Divider />
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            mt={2}
+          >
+            <Typography variant="h3" mb={2}>
+              Comments
+            </Typography>
+            {!commenting && (
+              <Button onClick={() => setcommenting(true)} variant="contained">
+                Comment
+              </Button>
+            )}
+          </Stack>
+          {commenting && (
+            <CommentForm
+              form={form}
+              handleChange={handleChange}
+              handleCommentSave={handleCommentSave}
+            />
+          )}
+          {!currentComments && <CircularProgress />}
+          {currentComments && (
+            <Box>
+              {currentComments.map((comment) => (
+                <CommentLine key={comment.id} comment={comment} />
+              ))}
             </Box>
           )}
         </Paper>

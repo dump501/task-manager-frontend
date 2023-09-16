@@ -41,12 +41,17 @@ const Sidebar = ({ items }) => {
         "& .MuiDrawer-paper": {
           width: drawerWidth,
           boxSizing: "border-box",
+          background:
+            theme.palette.mode === "light"
+              ? colors.blueAccent[800]
+              : colors.darkBlue[500],
         },
         boxSizing: "border-box",
       }}
       variant="persistent"
       anchor="left"
       open={isDrawerOpen}
+      bva
     >
       <DrawerHeader>
         <h2>Task manager</h2>
@@ -59,7 +64,7 @@ const Sidebar = ({ items }) => {
         <Typography sx={{ textAlign: "center", fontWeight: "bold" }}>
           {user.name}
         </Typography>
-        <Typography sx={{ color: colors.primary[400] }}>Admin</Typography>
+        <Typography sx={{ color: colors.primary[400] }}>{user.role}</Typography>
       </Box>
       <List>
         {items.map((item) => (
