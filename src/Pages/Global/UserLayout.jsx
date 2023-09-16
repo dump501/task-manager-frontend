@@ -5,31 +5,25 @@ import { drawerWidth } from "../../helpers/uiHelpers";
 import { useSelector } from "react-redux";
 import Topbar from "./Topbar";
 import { Mail } from "@mui/icons-material";
-
 const items = [
   {
     title: "Dashboard",
     icon: <Mail />,
-    to: "/admin/dashboard",
+    to: "/user/dashboard",
   },
   {
     title: "Tasks",
     icon: <Mail />,
-    to: "/admin/tasks",
-  },
-  {
-    title: "Manage users",
-    icon: <Mail />,
-    to: "/admin/users",
+    to: "/user/tasks",
   },
   {
     title: "Profile",
     icon: <Mail />,
-    to: "/admin/profile",
+    to: "/user/profile",
   },
 ];
 
-const AdminLayout = ({ children }) => {
+const UserLayout = () => {
   const { isDrawerOpen } = useSelector((state) => state.ui);
   return (
     <Box display="flex">
@@ -49,4 +43,4 @@ const AdminLayout = ({ children }) => {
   );
 };
 
-export default AdminLayout;
+export default UserLayout;

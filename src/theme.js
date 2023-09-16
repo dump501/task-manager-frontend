@@ -17,15 +17,15 @@ export const tokens = (mode) => ({
           900: "#141414",
         },
         primary: {
-          100: "#d0dbd5",
-          200: "#a1b7ab",
-          300: "#729381",
-          400: "#436f57",
-          500: "#144b2d",
-          600: "#103c24",
-          700: "#0c2d1b",
-          800: "#081e12",
-          900: "#040f09",
+          100: "#ccd0d3",
+          200: "#99a1a7",
+          300: "#67737b",
+          400: "#34444f",
+          500: "#011523",
+          600: "#01111c",
+          700: "#010d15",
+          800: "#00080e",
+          900: "#000407",
         },
         greenAccent: {
           100: "#dbf5ee",
@@ -74,15 +74,15 @@ export const tokens = (mode) => ({
           900: "#e0e0e0",
         },
         primary: {
-          100: "#040f09",
-          200: "#081e12",
-          300: "#0c2d1b",
-          400: "#f2f0f0",
-          500: "#144b2d",
-          600: "#436f57",
-          700: "#729381",
-          800: "#a1b7ab",
-          900: "#d0dbd5",
+          100: "#000407",
+          200: "#00080e",
+          300: "#010d15",
+          400: "#01111c",
+          500: "#011523",
+          600: "#34444f",
+          700: "#67737b",
+          800: "#99a1a7",
+          900: "#ccd0d3",
         },
         greenAccent: {
           100: "#0f2922",
@@ -131,7 +131,7 @@ export const themeSettings = (mode) => {
       ...(mode === "dark"
         ? {
             primary: {
-              main: colors.primary[500],
+              main: colors.blueAccent[500],
             },
             secondary: {
               main: colors.greenAccent[500],
@@ -147,7 +147,7 @@ export const themeSettings = (mode) => {
           }
         : {
             primary: {
-              main: colors.primary[100],
+              main: colors.primary[200],
             },
             secondary: {
               main: colors.greenAccent[500],

@@ -10,9 +10,9 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
-  styled,
   useTheme,
 } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { drawerWidth } from "../../helpers/uiHelpers";
 import { Link } from "react-router-dom";
@@ -42,6 +42,7 @@ const Sidebar = ({ items }) => {
           width: drawerWidth,
           boxSizing: "border-box",
         },
+        boxSizing: "border-box",
       }}
       variant="persistent"
       anchor="left"

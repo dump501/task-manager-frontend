@@ -14,6 +14,7 @@ import { useLoginMutation } from "../Features/auth/authApiSlice";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../Features/auth/authSlice";
 import HttpStatus from "../helpers/HttpStatus.json";
+import { readCookie, saveToCookie } from "../helpers/uiHelpers";
 
 const Home = () => {
   const [login, { isLoading }] = useLoginMutation();
@@ -43,6 +44,7 @@ const Home = () => {
           accessToken: response.data.accessToken,
         })
       );
+      saveToCookie("jwt", response.data.refreshToken);
       navigate("/admin/dashboard");
     } catch (error) {
       console.log(error);
@@ -98,6 +100,7 @@ const Home = () => {
               name="password"
               onChange={handleChange}
               fullWidth
+              type="password"
               placeholder="password"
               InputProps={{
                 startAdornment: (
