@@ -12,10 +12,13 @@ import {
   ArrowDropDownOutlined,
   ArrowDropUpOutlined,
 } from "@mui/icons-material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setAlertData, setAlertOpen } from "../../Features/uiSlice";
+import { selectCurrentUser } from "../../Features/auth/authSlice";
+import NoRow from "../../Components/NoRow";
 
 const AdminUsers = () => {
+  const user = useSelector(selectCurrentUser);
   const { data: users, isLoading } = useGetUsersQuery();
   const [adminUpdateUser, { isLoading: isSendingForm }] =
     useAdminUpdateUserMutation();
@@ -83,6 +86,10 @@ const AdminUsers = () => {
       headerName: "Actions",
       flex: 1,
       renderCell: ({ row: { role, id } }) => {
+        if (parseInt(user.id) === parseInt(id)) {
+          return "It's You";
+        }
+
         return role === "admin" ? (
           <Button
             startIcon={<ArrowDropDownOutlined />}
@@ -122,12 +129,14 @@ const AdminUsers = () => {
         <PageLoader />
       ) : (
         <Box boxSizing="border-box" width="100%">
-          {users?.data && (
+          {users?.data?.length ? (
             <DataGrid
               columns={columns}
               rows={users.data}
               slots={{ toolbar: GridToolbar }}
             />
+          ) : (
+            <NoRow />
           )}
         </Box>
       )}

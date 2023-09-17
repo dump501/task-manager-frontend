@@ -32,6 +32,7 @@ import {
 import CommentLine from "../../Components/CommentLine";
 import Detail from "../../Components/Detail";
 import CommentForm from "../Global/Fragment/CommentForm";
+import NoRow from "../../Components/NoRow";
 
 const columns = [
   {
@@ -158,7 +159,7 @@ const UserTasks = () => {
         <PageLoader />
       ) : (
         <Box width="100%">
-          {tasks?.data && (
+          {tasks?.data?.length ? (
             <DataGrid
               columns={columns}
               rows={tasks.data}
@@ -167,7 +168,12 @@ const UserTasks = () => {
               sx={{
                 width: "100%",
               }}
+              components={{
+                NoRowsOverlay: <NoRow />,
+              }}
             />
+          ) : (
+            <NoRow />
           )}
         </Box>
       )}

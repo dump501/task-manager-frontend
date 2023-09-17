@@ -43,6 +43,7 @@ import {
 } from "../../Features/comments/commentsApiSlice";
 import CommentForm from "../Global/Fragment/CommentForm";
 import CommentLine from "../../Components/CommentLine";
+import NoRow from "../../Components/NoRow";
 
 const columns = [
   {
@@ -233,7 +234,7 @@ const AdminTasks = () => {
               Create task
             </Button>
           </Stack>
-          {tasks?.data && (
+          {tasks?.data?.length ? (
             <DataGrid
               columns={columns}
               rows={tasks.data}
@@ -243,6 +244,8 @@ const AdminTasks = () => {
                 width: "100%",
               }}
             />
+          ) : (
+            <NoRow />
           )}
         </Box>
       )}

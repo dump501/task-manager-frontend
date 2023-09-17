@@ -21,6 +21,7 @@ import PageLoader from "../../Components/PageLoader";
 import { useGetUsersQuery } from "../../Features/users/usersApiSlice";
 import { DataGrid } from "@mui/x-data-grid";
 import { formatDateTime } from "../../helpers/uiHelpers";
+import NoRow from "../../Components/NoRow";
 
 const columns = [
   {
@@ -133,11 +134,17 @@ const UserDashboard = () => {
                   <Typography variant="h4" fontWeight="bold">
                     Total Tasks
                   </Typography>
-                  <Typography variant="h3" fontWeight="bold" mt={5}>
-                    {tasks?.data?.length < 10
-                      ? `0${tasks?.data?.length}`
-                      : `${tasks?.data?.length}`}
-                  </Typography>
+                  {tasks?.data?.length ? (
+                    <Typography variant="h3" fontWeight="bold" mt={5}>
+                      {tasks?.data?.length < 10
+                        ? `0${tasks?.data?.length}`
+                        : `${tasks?.data?.length}`}
+                    </Typography>
+                  ) : (
+                    <Typography variant="h4" fontWeight="bold" mt={5}>
+                      00
+                    </Typography>
+                  )}
                 </Stack>
                 <ViewList sx={{ width: 100, height: 100 }} />
               </Stack>
@@ -188,9 +195,9 @@ const UserDashboard = () => {
           <Grid item sm={12} md={6}>
             <Paper sx={{ p: 3, width: "100%" }}>
               <Typography variant="h3" mb={2}>
-                Tasks donut
+                Tasks pie chart
               </Typography>
-              {computedData?.data && (
+              {tasks?.data?.length && computedData?.data ? (
                 <PieChart
                   series={[
                     {
@@ -206,6 +213,8 @@ const UserDashboard = () => {
                   width={400}
                   height={200}
                 />
+              ) : (
+                <NoRow />
               )}
             </Paper>
           </Grid>
@@ -214,8 +223,10 @@ const UserDashboard = () => {
               <Typography variant="h3" mb={2}>
                 Latest Tasks
               </Typography>
-              {tasks?.data && (
+              {tasks?.data?.length ? (
                 <DataGrid columns={columns} rows={tasks.data.slice(-3)} />
+              ) : (
+                <NoRow />
               )}
             </Paper>
           </Grid>
