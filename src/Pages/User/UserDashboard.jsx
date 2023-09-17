@@ -92,7 +92,6 @@ const UserDashboard = () => {
             break;
         }
       }
-      console.log(done, inProgress, assigned);
 
       const data = [
         { id: 0, value: done, label: "Done" },

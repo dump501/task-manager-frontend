@@ -36,9 +36,7 @@ const Home = () => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      console.log(form);
       const response = await login(form).unwrap();
-      console.log(response);
       dispatch(
         setCredentials({
           user: response.data.user,
@@ -52,7 +50,6 @@ const Home = () => {
         navigate("/user/dashboard");
       }
     } catch (error) {
-      console.log(error);
       if (error?.status === HttpStatus.badRequest) {
         dispatch(
           setAlertData({

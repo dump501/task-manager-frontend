@@ -91,7 +91,6 @@ const UserTasks = () => {
     setopen(true);
     let response = await getTaskComments(selected.id);
     setcurrentComments(response.data.data);
-    console.log(response);
   };
 
   const handleChange = (e) => {

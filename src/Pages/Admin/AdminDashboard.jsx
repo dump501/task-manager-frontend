@@ -60,7 +60,6 @@ const AdminDashboard = () => {
   const [isLoading, setisLoading] = useState(true);
   const { data: users, isUserLoading } = useGetUsersQuery();
   const theme = useTheme();
-  console.log(users);
   const colors = tokens(theme.palette.mode);
   const [computedData, setcomputedData] = useState({
     done: 0,
@@ -93,7 +92,6 @@ const AdminDashboard = () => {
             break;
         }
       }
-      console.log(done, inProgress, assigned);
 
       const data = [
         { id: 0, value: done, label: "Done" },

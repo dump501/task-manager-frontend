@@ -119,7 +119,7 @@ const TaskForm = ({
             fontSize: 20,
           }}
         >
-          Assign to
+          Status
         </InputLabel>
         <Select
           name="current_status"

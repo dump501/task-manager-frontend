@@ -41,7 +41,6 @@ const AdminTaskCreate = () => {
 
   const handleSubmit = async (e) => {
     try {
-      console.log(form);
       let response = await storeTask(form);
       if (response?.error?.data) {
         dispatch(setAlertData({ type: "error", data: response?.error?.data }));

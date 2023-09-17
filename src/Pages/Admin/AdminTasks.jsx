@@ -114,10 +114,8 @@ const AdminTasks = () => {
   });
 
   const handleRowClick = async (id) => {
-    console.log(id, tasks?.data);
     let selected = tasks?.data.filter((task) => task.id === id)[0];
     setcurrentTask(selected);
-    console.log(selected);
     setform({
       title: selected.title,
       description: selected?.description,
