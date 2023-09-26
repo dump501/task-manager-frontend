@@ -5,11 +5,28 @@ import {
   selectCurrentUser,
 } from "../Features/auth/authSlice";
 import { Navigate, Outlet } from "react-router-dom";
+import AdminLayout from "../Pages/Global/AdminLayout";
+import UserLayout from "../Pages/Global/UserLayout";
 
 const AuthGuard = () => {
   const token = useSelector(selectCurrentToken);
   const user = useSelector(selectCurrentUser);
-  return <>{token && user ? <Outlet /> : <Navigate to="/" replace />}</>;
+  if (token && user) {
+    return (
+      <>
+        {parseInt(user.role_id) === 1 ? (
+          <AdminLayout>
+            <Outlet />
+          </AdminLayout>
+        ) : (
+          <UserLayout>
+            <Outlet />
+          </UserLayout>
+        )}
+      </>
+    );
+  }
+  return <Navigate to="/" replace />;
 };
 
 export default AuthGuard;

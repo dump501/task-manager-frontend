@@ -17,15 +17,26 @@ export const tokens = (mode) => ({
           900: "#141414",
         },
         primary: {
-          100: "#d0dbd5",
-          200: "#a1b7ab",
-          300: "#729381",
-          400: "#436f57",
-          500: "#144b2d",
-          600: "#103c24",
-          700: "#0c2d1b",
-          800: "#081e12",
-          900: "#040f09",
+          100: "#e1cfef",
+          200: "#c39ede",
+          300: "#a66ece",
+          400: "#883dbd",
+          500: "#6a0dad",
+          600: "#550a8a",
+          700: "#400868",
+          800: "#2a0545",
+          900: "#150323",
+        },
+        darkBlue: {
+          100: "#d0d1d5",
+          200: "#a1a4ab",
+          300: "#727681",
+          400: "#434957",
+          500: "#141b2d",
+          600: "#101624",
+          700: "#0c101b",
+          800: "#080b12",
+          900: "#040509",
         },
         greenAccent: {
           100: "#dbf5ee",
@@ -74,15 +85,26 @@ export const tokens = (mode) => ({
           900: "#e0e0e0",
         },
         primary: {
-          100: "#040f09",
-          200: "#081e12",
-          300: "#0c2d1b",
-          400: "#f2f0f0",
-          500: "#144b2d",
-          600: "#436f57",
-          700: "#729381",
-          800: "#a1b7ab",
-          900: "#d0dbd5",
+          100: "#150323",
+          200: "#2a0545",
+          300: "#400868",
+          400: "#550a8a",
+          500: "#6a0dad",
+          600: "#883dbd",
+          700: "#a66ece",
+          800: "#c39ede",
+          900: "#e1cfef",
+        },
+        darkBlue: {
+          100: "#040509",
+          200: "#080b12",
+          300: "#0c101b",
+          400: "#101624",
+          500: "#141b2d",
+          600: "#434957",
+          700: "#727681",
+          800: "#a1a4ab",
+          900: "#d0d1d5",
         },
         greenAccent: {
           100: "#0f2922",
@@ -127,14 +149,22 @@ export const themeSettings = (mode) => {
 
   return {
     palette: {
+      common: {
+        black: "#141414",
+        white: "#fc",
+      },
       mode: mode,
       ...(mode === "dark"
         ? {
             primary: {
+              dark: colors.primary[700],
               main: colors.primary[500],
+              light: colors.primary[100],
             },
             secondary: {
+              dark: colors.greenAccent[700],
               main: colors.greenAccent[500],
+              light: colors.greenAccent[100],
             },
             neutral: {
               dark: colors.grey[700],
@@ -142,15 +172,19 @@ export const themeSettings = (mode) => {
               light: colors.grey[100],
             },
             background: {
-              default: colors.primary[700],
+              default: colors.darkBlue[700],
             },
           }
         : {
             primary: {
-              main: colors.primary[100],
+              dark: colors.primary[700],
+              main: colors.primary[500],
+              light: colors.primary[100],
             },
             secondary: {
+              dark: colors.greenAccent[700],
               main: colors.greenAccent[500],
+              light: colors.greenAccent[100],
             },
             neutral: {
               dark: colors.grey[700],
@@ -158,7 +192,8 @@ export const themeSettings = (mode) => {
               light: colors.grey[100],
             },
             background: {
-              default: "#fcfcfc",
+              // default: "#fcfcfc",
+              default: colors.blueAccent[900],
             },
           }),
     },
