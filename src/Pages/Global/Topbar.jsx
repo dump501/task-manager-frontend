@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import { colorModeContext, tokens } from '../../theme'
 import { DarkModeOutlined, LightModeOutlined, Menu, NotificationsOutlined, PersonOutlineOutlined, Search, SettingsOutlined } from '@mui/icons-material'
 import { useDispatch } from 'react-redux'
-import { openDrawer } from '../../Redux/ui'
+import { openDrawer } from '../../Features/uiSlice'
 
 const Topbar = () => {
   const theme = useTheme()
