@@ -3,7 +3,7 @@ import HttpStatus from "../helpers/HttpStatus.json";
 import { logout, setCredentials } from "../Features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: import.meta.env.BACKEND_URL,
+  baseUrl: import.meta.env.VITE_BACKEND_URL,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
