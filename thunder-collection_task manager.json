@@ -1,0 +1,359 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "task manager",
+    "dateExported": "2023-10-05T16:47:19.367Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "23a9e735-8f7a-440e-b866-c679d1c834a7",
+            "name": "auth",
+            "containerId": "",
+            "created": "2023-09-12T07:55:41.528Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "0c154bb1-3a30-45cb-993b-74dc0efb6ba4",
+            "name": "task",
+            "containerId": "",
+            "created": "2023-09-12T10:58:07.843Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "23c10f3b-e4a7-406d-8eab-36a82dee8483",
+            "name": "comment",
+            "containerId": "",
+            "created": "2023-09-03T00:26:13.053Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "18360206-06cb-4599-b023-9d484eb8d45a",
+            "name": "users",
+            "containerId": "",
+            "created": "2023-09-16T08:26:22.106Z",
+            "sortNum": 40000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "be4e467c-38ec-4b69-859d-39d1fee78893",
+            "colId": "3943680a-c134-401f-a132-adc78789ea85",
+            "containerId": "23a9e735-8f7a-440e-b866-c679d1c834a7",
+            "name": "login",
+            "url": "http://localhost:8080/login",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-09-12T07:55:49.197Z",
+            "modified": "2023-09-16T14:39:07.112Z",
+            "headers": [
+                {
+                    "name": "Set-Cookie",
+                    "value": "jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjk0ODc0NzI0LCJleHAiOjE2OTc0NjY3MjR9.yjNsKy0pTMUAa8jkjbs05zE6-eW7WRK2IEpdyU75H9Y"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"admin@test.com\",\n  \"password\": \"1234\" \n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjk0NTEwOTkxLCJleHAiOjE2OTQ1OTczOTF9.SkL71uI0X_eWnAL2mvF5FKUF5kpDJvEiTPyo8n2PYP0"
+            },
+            "tests": []
+        },
+        {
+            "_id": "2e14d8bb-4d85-4b75-bcc3-4d5fbd2ae961",
+            "colId": "3943680a-c134-401f-a132-adc78789ea85",
+            "containerId": "0c154bb1-3a30-45cb-993b-74dc0efb6ba4",
+            "name": "store",
+            "url": "http://localhost:8080/admin/task",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-09-12T10:58:19.166Z",
+            "modified": "2023-09-03T00:07:24.147Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"title\",\n  \"description\": \"description\",\n  \"deadline\": \"2023-6-8\",\n  \"tag\": \"tag\",\n  \"assigned_to\": 2\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNzAxNTQ5LCJleHAiOjE2OTM3ODc5NDl9._Pr0ZUAh6vlMSvxHoSgRienr2iX-LYT76_twusDNDSw"
+            },
+            "tests": []
+        },
+        {
+            "_id": "dfc79389-474e-4ec5-806d-75fae9dfd4ac",
+            "colId": "3943680a-c134-401f-a132-adc78789ea85",
+            "containerId": "23a9e735-8f7a-440e-b866-c679d1c834a7",
+            "name": "register",
+            "url": "http://localhost:8080/register",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-09-12T07:56:33.058Z",
+            "modified": "2023-09-03T01:37:30.427Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Tsafack Fritz\",\n  \"email\": \"admin5@test.com\",\n  \"password\": \"1234\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "e4cd1320-74b5-47a1-9d0f-86235e4ff1db",
+            "colId": "3943680a-c134-401f-a132-adc78789ea85",
+            "containerId": "0c154bb1-3a30-45cb-993b-74dc0efb6ba4",
+            "name": "list",
+            "url": "http://localhost:8080/api/v1/task",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-09-03T00:43:56.978Z",
+            "modified": "2023-09-16T19:32:27.575Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjk0ODkyNzM1LCJleHAiOjE2OTQ4OTM1NzV9.ol5K2B7_zZFzj5DAXveyHwFJ-NyQ_Ty5p56yVieZVWg"
+            },
+            "tests": []
+        },
+        {
+            "_id": "3786984f-afc6-4738-a917-9d57e8370d50",
+            "colId": "3943680a-c134-401f-a132-adc78789ea85",
+            "containerId": "0c154bb1-3a30-45cb-993b-74dc0efb6ba4",
+            "name": "update",
+            "url": "http://localhost:8080/admin/task/1",
+            "method": "PATCH",
+            "sortNum": 40000,
+            "created": "2023-09-14T03:32:05.960Z",
+            "modified": "2023-09-14T04:17:08.153Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"title updated\",\n  \"description\": \"description updated\",\n  \"deadline\": \"2023-6-8\",\n  \"tag\": \"tag\",\n  \"assigned_to\": 2,\n  \"current_status\": \"Assigned\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjk0NjYyNDcyLCJleHAiOjE2OTQ3NDg4NzJ9.RUtGRK6ZvQcfghIUDjp-dChWsoRU1Tv2yXu1rxu4j5s"
+            },
+            "tests": []
+        },
+        {
+            "_id": "6960751b-1869-47ee-bfa0-0bfa4b8fc8a1",
+            "colId": "3943680a-c134-401f-a132-adc78789ea85",
+            "containerId": "0c154bb1-3a30-45cb-993b-74dc0efb6ba4",
+            "name": "delete",
+            "url": "http://localhost:8080/admin/task/6",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2023-09-03T00:00:35.598Z",
+            "modified": "2023-09-03T00:02:47.908Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjk0NjYyNDcyLCJleHAiOjE2OTQ3NDg4NzJ9.RUtGRK6ZvQcfghIUDjp-dChWsoRU1Tv2yXu1rxu4j5s"
+            },
+            "tests": []
+        },
+        {
+            "_id": "8ff3e892-f06b-49e4-9bd0-022d85248dec",
+            "colId": "3943680a-c134-401f-a132-adc78789ea85",
+            "containerId": "23c10f3b-e4a7-406d-8eab-36a82dee8483",
+            "name": "store",
+            "url": "http://localhost:8080/api/v1/comment",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2023-09-03T00:26:23.756Z",
+            "modified": "2023-09-03T01:41:25.711Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"content\": \"comment\",\n  \"task_id\": 1\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNzAxNTQ5LCJleHAiOjE2OTM3ODc5NDl9._Pr0ZUAh6vlMSvxHoSgRienr2iX-LYT76_twusDNDSw"
+            },
+            "tests": []
+        },
+        {
+            "_id": "1e1fa32f-09b3-462c-bedc-1d069e630a72",
+            "colId": "3943680a-c134-401f-a132-adc78789ea85",
+            "containerId": "23c10f3b-e4a7-406d-8eab-36a82dee8483",
+            "name": "list",
+            "url": "http://localhost:8080/api/v1/comment?task_id=1",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2023-09-03T01:42:25.062Z",
+            "modified": "2023-09-03T02:43:13.597Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "task_id",
+                    "value": "1",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkzNzAxNTQ5LCJleHAiOjE2OTM3ODc5NDl9._Pr0ZUAh6vlMSvxHoSgRienr2iX-LYT76_twusDNDSw"
+            },
+            "tests": []
+        },
+        {
+            "_id": "6e2e6939-b8ec-42b2-ab1a-16af28c0bfdc",
+            "colId": "3943680a-c134-401f-a132-adc78789ea85",
+            "containerId": "18360206-06cb-4599-b023-9d484eb8d45a",
+            "name": "profile",
+            "url": "http://localhost:8080/api/v1/user/profile",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2023-09-16T08:26:31.608Z",
+            "modified": "2023-09-16T10:34:31.138Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"name\": \"Tsafack Djiogo Fritz\",\n    \"email\": \"admin@test.com\",\n    \"profile\": null,\n    \"password\": \"$2a$08$I/lB2oxPjRqWz8EnJN4Xgu1vkBsOGxnhg8V5V6PHP5cqgI./IhbEa\",\n    \"role_id\": 1,\n    \"created_at\": \"2023-09-16T08:12:47.000Z\"\n  }",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjk0ODUyODg2LCJleHAiOjE2OTQ5MzkyODZ9.Zsqnghlr5Ltrxaml5AkjwunB64EY5PF_RaKMbHVRMoQ"
+            },
+            "tests": []
+        },
+        {
+            "_id": "a5d9d94a-3024-4d25-82a6-42759fc53982",
+            "colId": "3943680a-c134-401f-a132-adc78789ea85",
+            "containerId": "18360206-06cb-4599-b023-9d484eb8d45a",
+            "name": "delete",
+            "url": "http://localhost:8080/api/v1/admin/user/12",
+            "method": "DELETE",
+            "sortNum": 100000,
+            "created": "2023-09-16T08:39:25.578Z",
+            "modified": "2023-09-16T09:57:50.218Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjk0ODU4MjU2LCJleHAiOjE2OTQ5NDQ2NTZ9.IAC2OWQDCUCa3fKBSARgN7w68FDsYlJhH5IaaoTxEOE"
+            },
+            "tests": []
+        },
+        {
+            "_id": "27367c5b-6b4a-4ac1-8a68-c69d49227ce5",
+            "colId": "3943680a-c134-401f-a132-adc78789ea85",
+            "containerId": "18360206-06cb-4599-b023-9d484eb8d45a",
+            "name": "assigned tasks",
+            "url": "",
+            "method": "GET",
+            "sortNum": 110000,
+            "created": "2023-09-16T08:42:56.825Z",
+            "modified": "2023-09-16T08:42:56.825Z",
+            "headers": []
+        },
+        {
+            "_id": "07a86248-83ba-4d2a-9818-c76f9fae5ac7",
+            "colId": "3943680a-c134-401f-a132-adc78789ea85",
+            "containerId": "18360206-06cb-4599-b023-9d484eb8d45a",
+            "name": "admin update",
+            "url": "http://localhost:8080/api/v1/admin/user/3",
+            "method": "PATCH",
+            "sortNum": 120000,
+            "created": "2023-09-16T08:43:14.025Z",
+            "modified": "2023-09-16T10:41:03.580Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"role_id\": 1,\n    \"is_active\": 0\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjk0ODUyODg2LCJleHAiOjE2OTQ5MzkyODZ9.Zsqnghlr5Ltrxaml5AkjwunB64EY5PF_RaKMbHVRMoQ"
+            },
+            "tests": []
+        },
+        {
+            "_id": "6b3d4176-bef6-4263-b7aa-42fadb33217a",
+            "colId": "3943680a-c134-401f-a132-adc78789ea85",
+            "containerId": "18360206-06cb-4599-b023-9d484eb8d45a",
+            "name": "update",
+            "url": "http://localhost:8080/api/v1/user/12",
+            "method": "PATCH",
+            "sortNum": 130000,
+            "created": "2023-09-16T09:27:45.906Z",
+            "modified": "2023-09-16T10:57:22.780Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"id\": 1,\n    \"name\": \"Tsafack Djiogo Fritz\",\n    \"email\": \"admin@test.com\",\n    \"profile\": null,\n    \"password\": \"$2a$08$I/lB2oxPjRqWz8EnJN4Xgu1vkBsOGxnhg8V5V6PHP5cqgI./IhbEa\",\n    \"role_id\": 1,\n    \"created_at\": \"2023-09-16T08:12:47.000Z\",\n    \"is_active\": \"1\"\n  }",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjk0ODUyODg2LCJleHAiOjE2OTQ5MzkyODZ9.Zsqnghlr5Ltrxaml5AkjwunB64EY5PF_RaKMbHVRMoQ"
+            },
+            "tests": []
+        },
+        {
+            "_id": "7aeebdeb-02d3-4168-b947-f780cd6b549a",
+            "colId": "3943680a-c134-401f-a132-adc78789ea85",
+            "containerId": "23a9e735-8f7a-440e-b866-c679d1c834a7",
+            "name": "refresh token",
+            "url": "http://localhost:8080/refresh-token",
+            "method": "POST",
+            "sortNum": 140000,
+            "created": "2023-09-16T17:21:51.114Z",
+            "modified": "2023-09-19T06:15:09.347Z",
+            "headers": [
+                {
+                    "name": "Cookie",
+                    "value": "jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjk1MTA0MDYwLCJleHAiOjE2OTc2OTYwNjB9.N3hGrfJbLg4ThasgmcWq2_bns8_01YBx3mq8NZBXP34"
+                },
+                {
+                    "name": "Cookie",
+                    "value": "a=b",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjk1MTA0MDYwLCJleHAiOjE2OTUxMDQ5MDB9.aUUD0quUpMkxSQMsiBSH18wDmsgml8tIhQPF8oOWmQo"
+            },
+            "tests": []
+        },
+        {
+            "_id": "2a4352b1-c6b0-48f4-81d7-3e6fb7fc1624",
+            "colId": "3943680a-c134-401f-a132-adc78789ea85",
+            "containerId": "18360206-06cb-4599-b023-9d484eb8d45a",
+            "name": "list",
+            "url": "http://localhost:8080/api/v1/user",
+            "method": "GET",
+            "sortNum": 150000,
+            "created": "2023-09-16T21:41:12.603Z",
+            "modified": "2023-09-16T21:54:54.017Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjk0OTAxMjU3LCJleHAiOjE2OTQ5MDE4NTd9.giyeUi3KPJxnA8SZ8DFVEEm-kCdSUFziuxhYFeoAyj0"
+            },
+            "tests": []
+        }
+    ]
+}
