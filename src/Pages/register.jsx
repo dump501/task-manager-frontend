@@ -40,17 +40,14 @@ const Register = () => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      console.log(form);
       const response = await register(form).unwrap();
-      console.log(response);
       navigate("/");
     } catch (error) {
-      console.log(error);
       if (error?.status === HttpStatus.badRequest) {
         dispatch(
           setAlertData({
             type: "error",
-            data: "Email, Neme and password are required",
+            data: "Email, Name and password are required",
           })
         );
         dispatch(setAlertOpen(true));
@@ -59,7 +56,7 @@ const Register = () => {
         dispatch(
           setAlertData({
             type: "error",
-            data: "Incorrect mail and / or password",
+            data: "Please try later",
           })
         );
         dispatch(setAlertOpen(true));

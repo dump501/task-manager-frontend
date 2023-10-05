@@ -6,7 +6,6 @@ import { setAlertOpen } from "../Features/uiSlice";
 const DisplayAlert = () => {
   const dispatch = useDispatch();
   const { isAlertOpen, alertData } = useSelector((state) => state.ui);
-  console.log(alertData);
 
   const handleClose = () => {
     dispatch(setAlertOpen(false));

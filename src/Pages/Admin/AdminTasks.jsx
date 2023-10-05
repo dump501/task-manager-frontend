@@ -43,6 +43,7 @@ import {
 } from "../../Features/comments/commentsApiSlice";
 import CommentForm from "../Global/Fragment/CommentForm";
 import CommentLine from "../../Components/CommentLine";
+import NoRow from "../../Components/NoRow";
 
 const columns = [
   {
@@ -114,10 +115,8 @@ const AdminTasks = () => {
   });
 
   const handleRowClick = async (id) => {
-    console.log(id, tasks?.data);
     let selected = tasks?.data.filter((task) => task.id === id)[0];
     setcurrentTask(selected);
-    console.log(selected);
     setform({
       title: selected.title,
       description: selected?.description,
@@ -235,7 +234,7 @@ const AdminTasks = () => {
               Create task
             </Button>
           </Stack>
-          {tasks?.data && (
+          {tasks?.data?.length ? (
             <DataGrid
               columns={columns}
               rows={tasks.data}
@@ -245,6 +244,8 @@ const AdminTasks = () => {
                 width: "100%",
               }}
             />
+          ) : (
+            <NoRow />
           )}
         </Box>
       )}
